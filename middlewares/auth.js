@@ -6,9 +6,12 @@ require("dotenv").config();
 //Testing route
 exports.auth = (req,res,next)=>{
     try {
-
-        console.log("body" ,req.body.token);
-        console.log("cookie",req.cookies.token);
+        //to get token through body(bad practice)
+        // console.log("body" ,req.body.token);
+        //to get token through cookie (good practice)
+        // console.log("cookie",req.cookies.token);
+        //to get token through header(best practice);
+        // console.log("header",req.header("Authorization") )
         const token = req.body.token || req.cookies.token || req.header("Authorization").replace("Bearer ","");
         if(!token){
             return res.status(400).json({
