@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
+
+//Testing route
 exports.auth = (req,res,next)=>{
     try {
         const token = req.body.token; 
@@ -36,6 +38,7 @@ exports.auth = (req,res,next)=>{
     }
 }
 
+//Authorization for a Student
 exports.isStudent = (req,res,next)=>{
     try {
 
@@ -56,6 +59,7 @@ exports.isStudent = (req,res,next)=>{
     }
 }
 
+//Authorization for a Admin
 exports.isAdmin = (req,res,next)=>{
     try {
 
