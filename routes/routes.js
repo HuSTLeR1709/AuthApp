@@ -6,6 +6,8 @@ const {login,signup} = require("../Controllers/auth");
 
 const {auth, isStudent , isAdmin} = require("../middlewares/auth")
 
+const User = require("../models/User");
+
 
 router.post("/login", login);
 
@@ -31,6 +33,25 @@ router.get("/admin", auth , isAdmin , (req,res)=>{
         message:"Welcome to protected route for admin",
 
     })
+})
+
+router.get("/getData",auth, async (req,res)=>{
+    try {
+        const id = req.user.id;
+        const user = await User.findById(id);
+        // console.log(user);
+        res.status(200).json({
+            success:true,
+            user:user,
+            message:"Found user Details"
+        })
+    } catch (error) {
+        return res.status(400).json({
+            success:false,
+            message:"Error in findng details"
+        })
+        
+    }
 })
 
 module.exports = router;

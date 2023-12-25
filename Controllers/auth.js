@@ -86,11 +86,11 @@ exports.login = async (req,res)=>{
             user.token = token;
             user.password = undefined;
             const options={
-                expires:new Date( Date.now() + 3 * 24 * 60 * 60 * 1000),
+                expires:new Date( Date.now() +  3*24*60*60*1000),  //Cookie expiration time
                 htttpOnly: true,
             }
 
-            res.status(200).json({
+            res.cookie("token",token, options).status(200).json({
                 success:true,
                 token,
                 user,
